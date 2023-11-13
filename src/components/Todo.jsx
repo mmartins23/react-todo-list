@@ -1,11 +1,13 @@
 import './Todo.scss';
 
-function Todo({ todo }) {
+function Todo({ todo, deleteTodo, toggleIsDone }) {
 
   return (
     <>
         <div className={`todo ${todo.isDone ? 'done' : ''}`}>
-            <button className="erase">x erase</button>
+            <button 
+            onClick={() => deleteTodo(todo.id)}
+            className="erase">x erase</button>
             <h3>
                 {todo.title}
             </h3>
@@ -13,7 +15,10 @@ function Todo({ todo }) {
                 {todo.description}
             </p>
             <div className="task-check">
-                <input type="checkbox" checked={todo.isDone} />
+                <input 
+                onClick={() => toggleIsDone(todo.id)} 
+                type="checkbox" 
+                checked={todo.isDone} />
                 <label>
                     {!todo.isDone ? 'To-Do' : 'Done'}
                 </label>
