@@ -26,8 +26,6 @@ const initialTodos = [
   },
 ];
 
-
-
 function App() {
 
   const [todos, setTodos] = useState(initialTodos);
@@ -35,11 +33,11 @@ function App() {
   return (
     <>
       <main>
-        <TodosContext.Provider value={{todos, setTodos}}/>
+        <TodosContext.Provider value={{todos, setTodos}}>
         <Header appName="To-Do List with React" />
 
         <Home />
-
+       </TodosContext.Provider>
       </main>
     </>
   )
