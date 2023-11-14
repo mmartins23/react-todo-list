@@ -1,26 +1,8 @@
-import { createContext, useReducer, useContext, useState } from "react";
+import { createContext, useReducer, useContext, useState, useEffect } from "react";
 export const TodosContext = createContext("");
 
-const initialTodos = [
-  {
-    id: 0,
-    title: "Do Groceries",
-    description: "Buy apples, rice and water",
-    isDone: false,
-  },
-  {
-    id: 1,
-    title: "Study React",
-    description: "Understand context and reducers",
-    isDone: false,
-  },
-  {
-    id: 2,
-    title: "Learn Redux",
-    description: "Learn state management with Redux",
-    isDone: false,
-  },
-];
+const initialTodos = localStorage.getItem('todos') ? 
+JSON.parse(localStorage.getItem('todos')) : []
 
 export function TodosProvider({ children }) {
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
@@ -39,6 +21,11 @@ export function TodosProvider({ children }) {
         return todos;
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos])
+
 
   return (
     <>
